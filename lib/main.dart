@@ -29,12 +29,12 @@ class _InitialScreenState extends State<InitialScreen> {
     // TODO: implement initState
     super.initState();
     if (logged == true) {
-      Timer(Duration(seconds: 5), () =>
+      Timer(Duration(seconds: 1), () =>
           Navigator.push(context, MaterialPageRoute(
               builder: (BuildContext context) => HomePage())));
     }
     else {
-      Timer(Duration(seconds: 5), () =>
+      Timer(Duration(seconds: 1), () =>
           Navigator.push(context, MaterialPageRoute(
               builder: (BuildContext context) => LoginPage())));
 
