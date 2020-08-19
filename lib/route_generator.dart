@@ -5,7 +5,7 @@ class RouteGenerator{
     final args =settings.arguments;
     switch(settings.name){
       case '/':
-        return MaterialPageRoute(builder: (_)=> FirstPage());
+        return MaterialPageRoute(builder: (_)=> InitialScreen());
       case '/second':
 
     }
