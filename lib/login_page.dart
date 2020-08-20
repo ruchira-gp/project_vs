@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:vs_guard/constants.dart';
 import 'home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
+Future < bool> saveNamePreference(String name,String pw) async {
+  SharedPreferences prefs =await SharedPreferences.getInstance();
+  prefs.setString("username", name);
+  prefs.setString("pw", pw);
+  return prefs.commit();
+}
 
+Future <String> getNamePreference() async{
+  SharedPreferences pref =await SharedPreferences.getInstance();
+  String name=pref.getString("username");
+  return name;
+}
+Future <String> getPwPreference() async{
+  SharedPreferences pref =await SharedPreferences.getInstance();
+  String pw=pref.getString("pw");
+  return pw;
+}
 class _LoginPageState extends State<LoginPage> {
   Future<bool> _onInvalidLogin() {
     return showDialog(
@@ -31,11 +48,12 @@ class _LoginPageState extends State<LoginPage> {
   final myControllerlog = TextEditingController();
   final myControllerpw = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
         child: Scaffold(
-          appBar: AppBar(backgroundColor: kDefaultBackGroundColour,),
+          appBar: AppBar(backgroundColor: kDefaultBackGroundColour,automaticallyImplyLeading: false,),
           body: ListView.builder(
             itemCount: 1,
             itemBuilder: (context, position) {
@@ -112,20 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text('LOG IN'),
                           color: Colors.blue,
                           onPressed: () {
-                            if(myControllerlog.text=='abc' && myControllerpw.text=='123')
-                              {
-                                setState(() {
-                                  myControllerpw.text="";
-                                  myControllerlog.text="";
-                                  logged=true;
-
-                                });
-                                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => HomePage()));
-                              }
-                            else
-                              {
-                                _onInvalidLogin();
-                              }
+                            saveName();
                           }),
                     )
                   ],
@@ -133,5 +138,25 @@ class _LoginPageState extends State<LoginPage> {
             },
           ),
         ));
+  }
+
+  void saveName() {
+    String name = myControllerlog.text;
+    String pw =myControllerpw.text;
+    if(myControllerlog.text=='abc' && myControllerpw.text=='123') {
+      saveNamePreference(name, pw).then((bool committed) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+      });
+      setState(() {
+        myControllerpw.text="";
+        myControllerlog.text="";
+        logged=true;
+    });
+          }
+    else{
+      _onInvalidLogin();
+
+    }
   }
 }

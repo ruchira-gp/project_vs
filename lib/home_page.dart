@@ -1,5 +1,9 @@
+import 'dart:async';
+import 'package:move_to_background/move_to_background.dart';
 import 'package:flutter/material.dart';
+import 'package:vs_guard/login_page.dart';
 import 'constants.dart';
+import 'dart:io';
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -7,7 +11,7 @@ class HomePage extends StatefulWidget {
 
 
 class _HomePageState extends State<HomePage> {
-  Future<bool> _onBackPressed() {
+ /* Future<bool> _onBackPressed() {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -15,26 +19,30 @@ class _HomePageState extends State<HomePage> {
             title: Text('Are you sure?'),
             content: Text('You are going to exit the application!!'),
             actions: <Widget>[
-              FlatButton(
-                child: Text('NO'),
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
-              ),
+
               FlatButton(
                 child: Text('YES'),
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
+                onPressed: (){
+                }
               ),
             ],
           );
         });
-  }
+  }*/
+  String _name ="";
+  String _pw="";
   @override
+  void initState(){
+    getNamePreference().then(updateName);
+   getNamePreference().then(updatePw);
+    super.initState();
+  }
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: _onBackPressed,
+      onWillPop: () async {
+        MoveToBackground.moveTaskToBack();
+        return true;
+      },
 
       child :Stack(
         children: <Widget>[
@@ -46,11 +54,23 @@ class _HomePageState extends State<HomePage> {
             color: kDefaultBackGroundColour,
             height: 200.0,
             width: double.infinity,
+            child: Text(_name,style: TextStyle(color: Colors.blue,fontSize: 30),),
           ),
 
         ],
       ),
     );
+  }
+
+  void updateName(String name) {
+    setState(() {
+      this._name=name;
+    });
+  }
+  void updatePw(String pw) {
+    setState(() {
+      this._pw=pw;
+    });
   }
 }
 class FirstLayer extends StatelessWidget {
