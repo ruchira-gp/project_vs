@@ -101,23 +101,29 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 20,
                     ),
-                    TextField(
-                      controller: myControllerlog,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: "USER NAME",
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: myControllerlog,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: "USER NAME",
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    TextField(
-                      controller: myControllerpw,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'PASSWORD',
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: myControllerpw,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'PASSWORD',
+                        ),
                       ),
                     ),
                     SizedBox(
