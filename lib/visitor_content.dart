@@ -19,7 +19,7 @@ class VisitorContents extends StatelessWidget {
             child: Text(
               text,
               style: TextStyle(
-                  fontSize: 18.0, color: Colors.black),
+                  fontSize: 15.0, color: Colors.black),
             ),
           ),
           SizedBox(

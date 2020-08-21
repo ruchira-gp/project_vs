@@ -30,8 +30,10 @@ dependencies:
   cupertino_icons: ^0.1.3
   shared_preferences: ^0.5.8
   move_to_background: ^1.0.1
-  http: ^0.11.3+17
-  json_listview: ^0.1.0
+  http: ^0.12.1
+  qrscan: ^0.2.17
+  image_picker: ^0.6.7+4
+  image_gallery_saver: '^1.5.0'
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +60,8 @@ flutter:
     - images/qrcode.jpg
     - images/hand.jpg
     - images/user.png
+    - data/visitor_data_checkout.json
+    - data/visitor_data_today.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

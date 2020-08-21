@@ -1,16 +1,15 @@
 import 'package:flutter/cupertino.dart';
-
 import 'dart:convert';
 import 'constants.dart';
 import 'package:flutter/material.dart';
 
 
-class CheckedIn extends StatefulWidget {
+class TodaysVisitors extends StatefulWidget {
   @override
-  _CheckedInState createState() => _CheckedInState();
+  _TodaysVisitorsState createState() => _TodaysVisitorsState();
 }
 
-class _CheckedInState extends State<CheckedIn> {
+class _TodaysVisitorsState extends State<TodaysVisitors> {
 
   List data;
   @override
@@ -18,7 +17,7 @@ class _CheckedInState extends State<CheckedIn> {
     return Scaffold(
         backgroundColor: Colors.white70,
         appBar: AppBar(
-          title: Text('Checked-in Visitors'),
+          title: Text("Today's Visitors"),
           actions: <Widget>[
             // action button
             IconButton(
@@ -35,64 +34,64 @@ class _CheckedInState extends State<CheckedIn> {
         ),
         body: FutureBuilder(
           future: DefaultAssetBundle.of(context)
-              .loadString('data/visitor_data.json'),
+              .loadString('data/visitor_data_today.json'),
           builder: (context,snapshot){
             var myData= json.decode(snapshot.data.toString());
             return new GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), itemBuilder: (BuildContext context,int index){
               return  buildContainerBox(
                 name: myData[index]['V_Name'],
                 phNo: myData[index]['V_Contact'],
-                checkInTime: myData[index]['V_COT'],
+                checkOutTime: myData[index]['V_COT'],
                 totalVisitor: myData[index]['V_TotVisitor'],
                 visitTime: myData[index]['V_VT'],
               );
 
             },
-                itemCount: myData==null ? 0:myData.length,
+              itemCount: myData==null ? 0:myData.length,
             );
           },
         )
-        );
+    );
   }
 
   GestureDetector buildContainerBox(
       {String name,
-      String phNo,
-      String checkInTime,
-      String totalVisitor,
-      String visitTime}) {
+        String phNo,
+        String checkOutTime,
+        String totalVisitor,
+        String visitTime}) {
     return GestureDetector(
       onTap: (){
         showDialog(context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Center(child: Text('Visitor Details')),
-              content: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset('images/user.png'),
-                    Text('Name :'+name),
-                    Text('Phone Number :'+phNo),
-                    Text('Check-in Time '+checkInTime),
-                    Text('Total Visitors'+totalVisitor),
-                    Text('Visit Time '+visitTime),
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Center(child: Text('Visitor Details')),
+                content: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset('images/user.png'),
+                      Text('Name :'+name),
+                      Text('Phone Number :'+phNo),
+                      Text('Check-out Time '+checkOutTime),
+                      Text('Total Visitors'+totalVisitor),
+                      Text('Visit Time '+visitTime),
 
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text('OK'),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('OK'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
 
-              ],
-            );
-          });
+                ],
+              );
+            });
         //LowView(name: name,phNo: phNo,checkInTime: checkInTime,totalVisitor: totalVisitor,visitTime: visitTime,);
 
       },
@@ -134,7 +133,7 @@ class _CheckedInState extends State<CheckedIn> {
                 ),
                 Text('$phNo'),
                 Text(
-                  'Check in: $checkInTime',
+                  'Check out: $checkOutTime',
                   style: TextStyle(color: Colors.green),
                 ),
                 Text('Total Visitor :$totalVisitor'),
@@ -148,8 +147,8 @@ class _CheckedInState extends State<CheckedIn> {
 class LowView extends StatefulWidget {
   final String name;
   final String phNo;
-   final String emp;
- final  String checkInTime;
+  final String emp;
+  final  String checkInTime;
   final String totalVisitor;
   final String visitTime;
   final String purpose;
@@ -205,7 +204,7 @@ class _LowViewState extends State<LowView> {
                 ),
                 Text(LV.phNo),
                 Text(
-                  'Check in: '+LV.checkInTime,
+                  'Check out: '+LV.checkInTime,
                   style: TextStyle(color: Colors.green),
                 ),
                 Text('Total Visitor : '+LV.totalVisitor),
