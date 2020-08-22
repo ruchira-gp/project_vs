@@ -19,7 +19,10 @@ class ReusableCard extends StatelessWidget {
 
           ),
         ),
-        Text('$text',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18),),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text('$text',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
+        ),
       ],
     );
   }

@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'dart:convert';
 import 'constants.dart';
 import 'package:flutter/material.dart';
-
-
 class TodaysVisitors extends StatefulWidget {
   @override
   _TodaysVisitorsState createState() => _TodaysVisitorsState();

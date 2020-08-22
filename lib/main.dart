@@ -5,15 +5,22 @@ import 'dart:async';
 import 'login_page.dart';
 import 'home_page.dart';
 
-void main() {
-  runApp(VSGuard());
+import 'package:shared_preferences/shared_preferences.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  var email = preferences.getString('email');
+  runApp(MaterialApp(
+    home: email == null ? Login() : Dashboard(),
+  ));
 }
 
-class VSGuard extends StatelessWidget {
+/*class VSGuard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: InitialScreen(),
+      home: Login(),
     );
   }
 }
@@ -31,12 +38,12 @@ class _InitialScreenState extends State<InitialScreen> {
     if (logged == true) {
       Timer(Duration(seconds: 1), () =>
           Navigator.push(context, MaterialPageRoute(
-              builder: (BuildContext context) => HomePage())));
+              builder: (BuildContext context) => Login())));
     }
     else {
       Timer(Duration(seconds: 1), () =>
           Navigator.push(context, MaterialPageRoute(
-              builder: (BuildContext context) => LoginPage())));
+              builder: (BuildContext context) => Login())));
 
     }
   }
@@ -57,4 +64,4 @@ class _InitialScreenState extends State<InitialScreen> {
       )
     );
   }
-}
+}*/
