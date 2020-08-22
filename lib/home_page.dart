@@ -135,340 +135,344 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kDefaultBackGroundColour,
-      body: Stack(
-        children: <Widget>[
-          // Max Size
-          ListView.builder(
-            itemCount: 1,
-            itemBuilder: (context, position) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                    height: 10,
-                  ),
-                  SafeArea(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Image.asset(
-                          'images/prusight_logo.png',
-                          scale: 1.5,
-                        ),
-                        SizedBox(
-                          width: 180,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            print('Refresh');
-                          },
-                          child: Icon(
-                            Icons.refresh,
-                            color: Colors.white,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            print('Help');
-                          },
-                          child: Icon(
-                            Icons.help_outline,
-                            color: Colors.white,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              child: AlertDialog(
-                                title: Text('logout'),
-                                content:
-                                Text('Are you sure you want to logout?'),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    child: Text('No'),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                  FlatButton(
-                                    child: Text('Yes'),
-                                    onPressed: () {
-
-                                      logOut(context);
-                                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                                          Login()), (Route<dynamic> route) => false);
-                                      void _resetAndOpenPage() {
-                                        Navigator.pushAndRemoveUntil(context,
-                                          MaterialPageRoute(builder: (BuildContext context) => Login()),
-                                          ModalRoute.withName('/'),
-                                        );
-                                      }
-                                     // _resetAndOpenPage();
-                                    },
-                                  ),
-                                ],
-                              ),
-                            );
-                            print('logout');
-                          },
-                          child: Icon(
-                            Icons.power_settings_new,
-                            color: Colors.white,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        )
-                      ],
+    return WillPopScope(
+      onWillPop:(){SystemChannels.platform.invokeMethod('SystemNavigator.pop');},
+      child: Scaffold(
+        backgroundColor: kDefaultBackGroundColour,
+        body: Stack(
+          children: <Widget>[
+            // Max Size
+            ListView.builder(
+              itemCount: 1,
+              itemBuilder: (context, position) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Card(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Guard Name : $_guardName",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            'Test',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Card(
+                    SafeArea(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        textBaseline: TextBaseline.ideographic,
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Image.asset(
+                            'images/prusight_logo.png',
+                            scale: 1.5,
+                          ),
+                          SizedBox(
+                            width: 180,
+                          ),
                           GestureDetector(
                             onTap: () {
-                              _scan();
+                              print('Refresh');
                             },
-                            child: ReusableCard(
-                              cardChild: Card(
-                                child: Image.asset(
-                                  'images/qrcode.jpg',
-                                  scale: 2,
+                            child: Icon(
+                              Icons.refresh,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              print('Help');
+                            },
+                            child: Icon(
+                              Icons.help_outline,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                child: AlertDialog(
+                                  title: Text('logout'),
+                                  content:
+                                  Text('Are you sure you want to logout?'),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text('No'),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    FlatButton(
+                                      child: Text('Yes'),
+                                      onPressed: () {
+
+
+                                        logOut(context);
+                                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                            Login()), (Route<dynamic> route) => false);
+                                        void _resetAndOpenPage() {
+                                          Navigator.pushAndRemoveUntil(context,
+                                            MaterialPageRoute(builder: (BuildContext context) => Login()),
+                                            ModalRoute.withName('/'),
+                                          );
+                                        }
+                                       // _resetAndOpenPage();
+                                      },
+                                    ),
+                                  ],
                                 ),
+                              );
+                              print('logout');
+                            },
+                            child: Icon(
+                              Icons.power_settings_new,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Card(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Guard Name : $_guardName",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Test',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          textBaseline: TextBaseline.ideographic,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                _scan();
+                              },
+                              child: ReusableCard(
+                                cardChild: Card(
+                                  child: Image.asset(
+                                    'images/qrcode.jpg',
+                                    scale: 2,
+                                  ),
+                                ),
+                                text: "QR CODE",
                               ),
-                              text: "QR CODE",
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 10.0),
+                              child: Container(
+                                height: 180.0,
+                                width: 1.0,
+                                color: Colors.black,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    child: Card(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Form(
+                                            key: formKey,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                Text('ENTER CODE',
+                                                    style: TextStyle(
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                        FontWeight.bold)),
+                                                TextFormField(
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                      FontWeight.bold,
+                                                      fontSize: 30),
+                                                  keyboardType:
+                                                  TextInputType.number,
+                                                  decoration: InputDecoration(
+                                                    labelStyle: TextStyle(
+                                                      fontSize: 20,
+                                                    ),
+                                                  ),
+                                                  onSaved: (input) =>
+                                                  _typedCode = input,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                  const EdgeInsets.all(8.0),
+                                                  child: Center(
+                                                    child: RaisedButton(
+                                                      onPressed: _submit,
+                                                      child: Text('Submit'),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            )),
+                                      ),
+                                    ));
+                              },
+                              child: ReusableCard(
+                                cardChild: Card(
+                                  child: Image.asset(
+                                    'images/hand.jpg',
+                                    scale: 2,
+                                  ),
+                                ),
+                                text: "ENTER CODE",
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Card(
+                      margin: EdgeInsets.only(left: 15, right: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: VisitorContents(
+                                text: "Today's \nVisitors ",
+                                visNumber: 30,
+                                doThis: () {
+                                  print("todays");
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              TodaysVisitors()));
+                                },
+                              ),
                             ),
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 10.0),
                             child: Container(
-                              height: 180.0,
+                              height: 130.0,
                               width: 1.0,
                               color: Colors.black,
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              showDialog(
-                                  context: context,
-                                  child: Card(
-                                    child: Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Form(
-                                          key: formKey,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: <Widget>[
-                                              Text('ENTER CODE',
-                                                  style: TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                      FontWeight.bold)),
-                                              TextFormField(
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                    FontWeight.bold,
-                                                    fontSize: 30),
-                                                keyboardType:
-                                                TextInputType.number,
-                                                decoration: InputDecoration(
-                                                  labelStyle: TextStyle(
-                                                    fontSize: 20,
-                                                  ),
-                                                ),
-                                                onSaved: (input) =>
-                                                _typedCode = input,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(8.0),
-                                                child: Center(
-                                                  child: RaisedButton(
-                                                    onPressed: _submit,
-                                                    child: Text('Submit'),
-                                                  ),
-                                                ),
-                                              )
-                                            ],
-                                          )),
-                                    ),
-                                  ));
-                            },
-                            child: ReusableCard(
-                              cardChild: Card(
-                                child: Image.asset(
-                                  'images/hand.jpg',
-                                  scale: 2,
-                                ),
+                          Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: VisitorContents(
+                                text: "Checked-in\n  Visitors",
+                                visNumber: 20,
+                                doThis: () {
+                                  print(" checked");
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              CheckedIn()));
+                                },
                               ),
-                              text: "ENTER CODE",
                             ),
-                          )
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10.0),
+                            child: Container(
+                              height: 130.0,
+                              width: 1.0,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: VisitorContents(
+                                text: "Checked-out\n  Visitors",
+                                visNumber: 40,
+                                doThis: () {
+                                  print(" checked");
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              CheckedOut()));
+                                },
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Card(
-                    margin: EdgeInsets.only(left: 15, right: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: VisitorContents(
-                              text: "Today's \nVisitors ",
-                              visNumber: 30,
-                              doThis: () {
-                                print("todays");
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            TodaysVisitors()));
-                              },
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.0),
-                          child: Container(
-                            height: 130.0,
-                            width: 1.0,
-                            color: Colors.black,
-                          ),
-                        ),
-                        Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: VisitorContents(
-                              text: "Checked-in\n  Visitors",
-                              visNumber: 20,
-                              doThis: () {
-                                print(" checked");
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            CheckedIn()));
-                              },
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.0),
-                          child: Container(
-                            height: 130.0,
-                            width: 1.0,
-                            color: Colors.black,
-                          ),
-                        ),
-                        Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: VisitorContents(
-                              text: "Checked-out\n  Visitors",
-                              visNumber: 40,
-                              doThis: () {
-                                print(" checked");
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            CheckedOut()));
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
+                    SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
 
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
 
-                        children: [
-                          Card(
-                            child: Container(
-                              child:SizedBox(
-                                height: 120,
-                                width: 150,
-                              )
-                            ),
-                          ),
-                          Card(
-                            child: Container(
+                          children: [
+                            Card(
+                              child: Container(
                                 child:SizedBox(
                                   height: 120,
-                                  width: 100,
+                                  width: 150,
                                 )
+                              ),
                             ),
-                          ),
-                        ],
+                            Card(
+                              child: Container(
+                                  child:SizedBox(
+                                    height: 120,
+                                    width: 100,
+                                  )
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  )
-                ],
-              );
-            },
-          ),
-        ],
+                    )
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

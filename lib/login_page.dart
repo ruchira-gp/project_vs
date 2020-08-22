@@ -3,6 +3,7 @@ import 'home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'constants.dart';
+
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -45,10 +46,12 @@ class _LoginState extends State<Login> {
       );
     }
   }
-
+  CircularProgressIndicator pr;
 
   @override
+
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(backgroundColor: kDefaultBackGroundColour,
         automaticallyImplyLeading: false,),
